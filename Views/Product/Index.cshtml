@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ASP.NetCoreWebAppEmample.Models.Product>
+
+<h1 style="color:cadetblue">Product List</h1>
+<hr style="color: cadetblue" />
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+
+
+            <div class="col-md-3" style="width: 200px; height: 350px; border: 2px solid; padding-left: 24px; margin-left: 10px; ">
+
+                <div class="row">
+                    <p>Product Name:</p> @Html.DisplayFor(modelItem => item.Pname)
+
+                </div>
+                <div class="row">
+                    <p>Product Name:</p> @Html.DisplayFor(modelItem => item.Pname)
+
+                </div>
+                <div class="row">
+                    <p>Price:</p>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </div>
+                <div class="row">
+                    <p>Company:</p>
+                    @Html.DisplayFor(modelItem => item.Company)
+                </div>
+                <div class="row">
+                    <p>Description:</p>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </div>
+                <div>
+
+
+                    @Html.ActionLink("Add To Cart", " ", new { })
+                </div>
+
+
+
+            </div>
+        }
+
+    </div>
+</div>

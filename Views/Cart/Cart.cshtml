@@ -1,0 +1,57 @@
+﻿@model IEnumerable<ASP.NetCoreWebAppEmample.Models.Product>
+
+
+
+
+<h1>Cart</h1>
+
+<p>
+    <a asp-action="Cart">Cart</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Pname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Company)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Product item in ViewBag.Product)
+        {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Pname)
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Company)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.ActionLink("Remove", "Remove", new { id = item.ProductId })
+
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
