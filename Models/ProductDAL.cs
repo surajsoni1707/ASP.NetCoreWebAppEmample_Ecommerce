@@ -83,13 +83,13 @@ namespace ASP.NetCoreWebAppEmample.Models
         
 
 
-       public int AddToCart(int pid,string ui)
+       public int AddToCart(int pid,string ui,int qty)
         {
             string str = "insert into CartTable values(@pid,@uid,@Quantity)";
             cmd = new SqlCommand(str, con);
             cmd.Parameters.AddWithValue("@pid", pid);
             cmd.Parameters.AddWithValue("@uid", ui);
-            cmd.Parameters.AddWithValue("@Quantity", 1);
+            cmd.Parameters.AddWithValue("@Quantity", qty);
             con.Open();
             int res = cmd.ExecuteNonQuery();
             con.Close();

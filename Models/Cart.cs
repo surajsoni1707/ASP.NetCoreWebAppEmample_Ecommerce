@@ -12,6 +12,6 @@ namespace ASP.NetCoreWebAppEmample.Models
         public int Cid { get; set; }
         public int Pid { get; set; }
         public int Uid { get; set; }
-        public int Quantity { get; set; }
+        public int Quantity { set; get; }
     }
 }

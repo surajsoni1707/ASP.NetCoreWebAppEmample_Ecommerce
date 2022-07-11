@@ -6,9 +6,7 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -27,11 +25,16 @@
             <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                <p>Action</p>
+            </th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (Product item in ViewBag.ProdList) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.ProductId)
@@ -49,10 +52,27 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.ActionLink("Add TO Cart","Cart","Cart", new {  pid=item.ProductId }) 
-               
+                <input type="text" id="@item.ProductId+qty" name="qua" value="1" />
+                
+                
+            </td>
+            <td>
+                
+                <a  onclick="PassQuant(@item.ProductId)"><button type="button" class="btn-info" >AddToCart</button></a>
+
+
             </td>
         </tr>
 }
     </tbody>
 </table>
+<script>
+    function PassQuant(id) {
+
+        var qty = document.getElementById(id+'+qty').value
+        window.location = `Cart/Cart?pid=${id}&qty=${qty}`
+        
+        
+    }
+</script>
+

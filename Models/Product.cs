@@ -15,5 +15,6 @@ namespace ASP.NetCoreWebAppEmample.Models
         public float Price { set; get; }
         public string Company { set; get; }
         public string Description { set; get; }
+        public int Quantity { set; get; }
     }
 }

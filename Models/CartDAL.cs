@@ -16,10 +16,10 @@ namespace ASP.NetCoreWebAppEmample.Models
         {
             con = new SqlConnection(Startup.ConnectionStrings);
         }
-        public List<int> GetCartProduct(int uid)
+        public List<Cart> GetCartProduct(String uid)
         {
-            List<int> cl = new List<int>();
-            Cart c = new Cart();
+            List<Cart> cl = new List<Cart>();
+            
             string str = "select * from CartTable where uid=@uid";
             
             
@@ -32,9 +32,11 @@ namespace ASP.NetCoreWebAppEmample.Models
             {
                 while (dr.Read())
                 {
-
+                    Cart c = new Cart();
+                    c.Cid= Convert.ToInt32(dr["Cid"]);
                     c.Pid = Convert.ToInt32(dr["Pid"]);
-                    cl.Add(c.Pid);
+                    c.Quantity = Convert.ToInt32(dr["Quantity"]);
+                    cl.Add(c);
 
                 }
                 con.Close();

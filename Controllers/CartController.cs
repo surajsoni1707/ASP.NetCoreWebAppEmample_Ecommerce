@@ -21,19 +21,25 @@ namespace ASP.NetCoreWebAppEmample.Controllers
 
         // GET: CartController
         [Authorize]
-        public ActionResult Cart(int pid)
-        {
+        
+        public ActionResult Cart(int pid,int qty) 
+        { 
+
+
+            
             string userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             List<Product> plist = new List<Product>();
-            int res = pd.AddToCart(pid,userId);
+            int res = pd.AddToCart(pid,userId,qty);
             if (res == 1)
             {
                 
 
-                var m = cd.GetCartProduct(1);
-               foreach(var item in m)
+                var m = cd.GetCartProduct(userId);
+                
+               foreach (var item in m)
                 {
-                    Product p = pd.GetProductById(item);
+                    Product p = pd.GetProductById(item.Pid);
+                    p.Quantity = item.Quantity;
                     plist.Add(p);
                 }
                ViewBag.Product = plist;

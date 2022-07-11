@@ -28,20 +28,16 @@ namespace ASP.NetCoreWebAppEmample.Controllers
         {
             //HttpContext.Session.SetString("aaa", "pro");
 
-            var model = pd.GetAllProducts();
-            return View(model);
+            ViewBag.ProdList = pd.GetAllProducts();
+            return View();
         }
         
         [HttpPost]
         public IActionResult Index(int pid)
         {
             
-            int res=pd.AddToCart(pid);
-            if(res==1)
-            {
-                return RedirectToAction("Cart","Cart",1);
-            }
-
+            
+           
             return View();
 ;        }
 
