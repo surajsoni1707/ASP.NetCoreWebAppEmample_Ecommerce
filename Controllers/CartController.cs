@@ -29,6 +29,7 @@ namespace ASP.NetCoreWebAppEmample.Controllers
             
             string userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             List<Product> plist = new List<Product>();
+            
             int res = pd.AddToCart(pid,userId,qty);
             if (res == 1)
             {
@@ -41,17 +42,49 @@ namespace ASP.NetCoreWebAppEmample.Controllers
                     Product p = pd.GetProductById(item.Pid);
                     p.Quantity = item.Quantity;
                     plist.Add(p);
+                    
                 }
                ViewBag.Product = plist;
+                
             }
             return View();
         }
+        [Authorize]
+        public ActionResult Order()
+            {
+                List<Product> plist = new List<Product>();
+                string userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                var m = cd.GetCartProduct(userId);
 
-      
-       
+                foreach (var item in m)
+                {
+                    Product p = pd.GetProductById(item.Pid);
+                    p.Quantity = item.Quantity;
+                    int res = cd.PlaceOrder(item.Pid, userId, p.Quantity);
+                    if(res>=1)
+                    {
+                    int res1 = cd.EmptyCart(userId);
+                    }
+                    plist.Add(p);
 
-      
-        public ActionResult Delete(int id)
+
+                }
+                ViewBag.Product = plist;
+
+            return View();
+            }
+        
+
+
+
+
+
+
+
+
+
+
+            public ActionResult Delete(int id)
         {
             return View();
         }

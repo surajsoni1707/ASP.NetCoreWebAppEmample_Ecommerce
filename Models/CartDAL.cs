@@ -51,6 +51,32 @@ namespace ASP.NetCoreWebAppEmample.Models
 
         }
 
+      
+
+        public int PlaceOrder(int pid, string ui, int qty)
+        {
+            string str = "insert into OrderTable values(@pid,@uid,@Quantity)";
+            cmd = new SqlCommand(str, con);
+            cmd.Parameters.AddWithValue("@pid", pid);
+            cmd.Parameters.AddWithValue("@uid", ui);
+            cmd.Parameters.AddWithValue("@Quantity", qty);
+            con.Open();
+            int res = cmd.ExecuteNonQuery();
+            con.Close();
+            return res;
+
+        }
+        public int EmptyCart(string ui)
+        {
+            string str = "delete from CartTable where uid = @uid";
+            cmd = new SqlCommand(str, con);
+            cmd.Parameters.AddWithValue("@uid", ui);
+            con.Open();
+            int res = cmd.ExecuteNonQuery();
+            con.Close();
+            return res;
+        }
+
 
 
 
